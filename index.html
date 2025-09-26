@@ -1,0 +1,1211 @@
+<artifact identifier="dashboard-calculateur-ultra-complet" type="text/html" title="Dashboard Ultra Complet - Tous Frais Acquisition">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Investisseur Pro - Calculateur Ultra Complet</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.header {
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+.header h1 { font-size: 2.5em; }
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+.tab {
+    padding: 15px 25px;
+    background: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+.tab:hover { background: #e0e0e0; }
+.tab.active { background: #667eea; color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.kpi-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 15px;
+}
+.kpi-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    margin: 10px 0;
+}
+.calc-container {
+background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+padding: 30px;
+border-radius: 15px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.calc-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+margin-top: 20px;
+}
+.calc-section {
+background: white;
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.calc-section h3 {
+color: #667eea;
+margin-bottom: 15px;
+font-size: 1.1em;
+border-bottom: 2px solid #f0f0f0;
+padding-bottom: 8px;
+}
+.input-group { margin-bottom: 12px; }
+.input-group label {
+display: block;
+margin-bottom: 4px;
+font-weight: 600;
+color: #555;
+font-size: 0.85em;
+}
+.input-group input, .input-group select {
+width: 100%;
+padding: 8px;
+border: 2px solid #e0e0e0;
+border-radius: 6px;
+font-size: 0.9em;
+}
+.input-group input:focus, .input-group select:focus {
+border-color: #667eea;
+outline: none;
+}
+.form-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+}
+.btn {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+padding: 15px 30px;
+border-radius: 10px;
+font-size: 1.1em;
+font-weight: 600;
+cursor: pointer;
+margin: 10px 5px;
+width: 100%;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-secondary { background: #6c757d; }
+.result {
+background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+color: white;
+padding: 40px;
+border-radius: 15px;
+margin-top: 30px;
+text-align: center;
+}
+.result h2 { font-size: 2em; margin-bottom: 20px; }
+.result-offre {
+font-size: 4em;
+font-weight: bold;
+margin: 20px 0;
+}
+.result-details {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 15px;
+margin-top: 30px;
+}
+.result-detail {
+background: rgba(255,255,255,0.2);
+padding: 15px;
+border-radius: 10px;
+}
+.result-detail-label {
+font-size: 0.8em;
+opacity: 0.9;
+margin-bottom: 5px;
+}
+.result-detail-value {
+font-size: 1.3em;
+font-weight: bold;
+}
+.breakdown {
+margin-top: 30px;
+background: rgba(255,255,255,0.2);
+padding: 25px;
+border-radius: 10px;
+text-align: left;
+}
+.breakdown-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+margin-top: 15px;
+}
+.breakdown-section h4 {
+margin-bottom: 10px;
+font-size: 1em;
+border-bottom: 1px solid rgba(255,255,255,0.3);
+padding-bottom: 5px;
+}
+.breakdown-item {
+display: flex;
+justify-content: space-between;
+margin-bottom: 4px;
+font-size: 0.85em;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+overflow-x: auto;
+}
+th, td {
+padding: 10px;
+text-align: left;
+border-bottom: 1px solid #e0e0e0;
+font-size: 0.85em;
+}
+th { background: #f5f5f5; font-weight: 600; }
+.total-line {
+border-top: 2px solid rgba(255,255,255,0.5);
+margin-top: 8px;
+padding-top: 8px;
+font-weight: bold;
+font-size: 1em;
+}
+.section-expand {
+cursor: pointer;
+user-select: none;
+}
+.section-expand:hover h3 {
+color: #5568d3;
+}
+.collapsible-content {
+max-height: 1000px;
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+.collapsed {
+max-height: 0;
+}
+@media (max-width: 1200px) {
+.calc-grid {
+grid-template-columns: repeat(3, 1fr);
+}
+}
+@media (max-width: 900px) {
+.calc-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+.result-details {
+grid-template-columns: repeat(3, 1fr);
+}
+.breakdown-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (max-width: 600px) {
+.calc-grid, .form-grid, .result-details, .breakdown-grid {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<script>
+// ===== SYSTÈME DE PROTECTION AVEC GÉNÉRATEUR =====
+
+// Configuration (vous pouvez modifier ces valeurs)
+let masterPassword = "ADMIN2025";  // Votre mot de passe maître
+let currentAccessCode = "NORIA001"; // Code d'accès par défaut
+
+// Génère un nouveau code aléatoire
+function generateNewCode() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "NORIA";
+    for (let i = 0; i < 3; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+// Panneau administrateur
+function adminPanel() {
+    const adminPass = prompt("Mot de passe administrateur :");
+    if (adminPass === masterPassword) {
+        const newCode = generateNewCode();
+        localStorage.setItem('dashboardAccessCode', newCode);
+        alert("✅ Nouveau code généré : " + newCode + "\n\nPartagez ce code avec les utilisateurs autorisés.");
+        return true;
+    } else {
+        alert("❌ Mot de passe administrateur incorrect");
+        return false;
+    }
+}
+
+// Vérification d'accès principal
+function checkAccess() {
+    // Récupère le code actuel (stocké ou par défaut)
+    const validCode = localStorage.getItem('dashboardAccessCode') || currentAccessCode;
+    
+    const userInput = prompt("🔐 Code d'accès Dashboard Investisseur :");
+    
+    // Si l'utilisateur tape ADMIN
+    if (userInput === "ADMIN") {
+        return adminPanel();
+    }
+    
+    // Vérification du code normal
+    if (userInput === validCode) {
+        return true;
+    } else {
+        alert("❌ Code d'accès incorrect");
+        window.location.href = "https://google.com";
+        return false;
+    }
+}
+
+// Vérification au chargement de la page
+window.onload = function() {
+    if (!checkAccess()) {
+        document.body.style.display = "none";
+    }
+}
+</script>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 DASHBOARD INVESTISSEUR PRO</h1>
+        <p>Semaine <span id="semaine"></span> - <span id="date"></span></p>
+    </div>
+<div class="tabs">
+    <button class="tab active" onclick="openTab(0)">📊 Dashboard</button>
+    <button class="tab" onclick="openTab(1)">📋 Pipeline</button>
+    <button class="tab" onclick="openTab(2)">💰 Calculateur</button>
+</div>
+
+<div class="tab-content active">
+    <h2>📊 Vue d'ensemble</h2>
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <h3>Propriétés analysées</h3>
+            <div class="kpi-value" id="nbAnalysees">0</div>
+            <p>Objectif: 50/semaine</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Vendeurs contactés</h3>
+            <div class="kpi-value" id="nbContactes">0</div>
+            <p>Objectif: 30/semaine</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Visites terrain</h3>
+            <div class="kpi-value" id="nbVisites">0</div>
+            <p>Objectif: 5/semaine</p>
+        </div>
+        <div class="kpi-card">
+            <h3>Offres soumises</h3>
+            <div class="kpi-value" id="nbOffres">0</div>
+            <p>Objectif: 2/semaine</p>
+        </div>
+    </div>
+    <button class="btn" onclick="openTab(2)">💰 Calculer une offre</button>
+</div>
+
+<div class="tab-content">
+    <h2>📋 Pipeline Prospects</h2>
+    
+    <button class="btn" onclick="toggleForm()">➕ Nouveau Prospect</button>
+    
+    <div id="formProspect" style="display:none; margin-top:20px; padding:30px; background:#f5f5f5; border-radius:10px;">
+        <h3 style="margin-bottom: 20px;">Ajouter un prospect</h3>
+        
+        <div class="form-grid">
+            <div class="input-group">
+                <label>Adresse</label>
+                <input type="text" id="adresse" placeholder="123 Rue Example">
+            </div>
+            <div class="input-group">
+                <label>Vendeur</label>
+                <input type="text" id="vendeur" placeholder="Nom du vendeur">
+            </div>
+            <div class="input-group">
+                <label>Surface (m²)</label>
+                <input type="number" id="surfacePipeline" placeholder="500">
+            </div>
+            <div class="input-group">
+                <label>Prix (€)</label>
+                <input type="number" id="prix" placeholder="250000">
+            </div>
+            <div class="input-group">
+                <label>Statut</label>
+                <select id="statut">
+                    <option>Lead</option>
+                    <option>Contacté</option>
+                    <option>Visité</option>
+                    <option>Offre</option>
+                    <option>Signé</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Notes</label>
+                <input type="text" id="notes" placeholder="Notes importantes">
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="btn" onclick="saveProspect()">💾 Sauvegarder</button>
+            <button class="btn btn-secondary" onclick="toggleForm()">❌ Annuler</button>
+        </div>
+    </div>
+    
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Adresse</th>
+                    <th>Vendeur</th>
+                    <th>Surface</th>
+                    <th>Prix</th>
+                    <th>Statut</th>
+                    <th>Notes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="pipelineBody">
+                <tr><td colspan="8" style="text-align:center; padding:40px; color:#999;">Aucun prospect</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="tab-content">
+    <div class="calc-container">
+        <h2 style="color: #667eea; margin-bottom: 20px; text-align: center; font-size: 2em;">💰 Calculateur Ultra Complet d'Acquisition</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 25px;">Tous les frais possibles d'une acquisition immobilière</p>
+        
+        <div class="calc-grid">
+            <!-- SECTION 1: BIEN -->
+            <div class="calc-section">
+                <h3>🏢 Informations du bien</h3>
+                <div class="input-group">
+                    <label>Prix demandé vendeur</label>
+                    <input type="number" id="prixVendeur" placeholder="300000">
+                </div>
+                <div class="input-group">
+                    <label>Surface (m²)</label>
+                    <input type="number" id="surface" placeholder="500">
+                </div>
+                <div class="input-group">
+                    <label>Type bien</label>
+                    <select id="typeBien">
+                        <option value="ancien">Ancien</option>
+                        <option value="neuf">Neuf</option>
+                        <option value="vefa">VEFA</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Financement</label>
+                    <select id="typeFinancement">
+                        <option value="cash">Cash</option>
+                        <option value="credit">Crédit</option>
+                        <option value="mixte">Mixte</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SECTION 2: FRAIS NOTARIAUX -->
+            <div class="calc-section">
+                <h3>⚖️ Frais notariaux</h3>
+                <div class="input-group">
+                    <label>Émoluments notaire</label>
+                    <input type="number" id="emoluments" value="2000">
+                </div>
+                <div class="input-group">
+                    <label>Droits d'enregistrement (%)</label>
+                    <input type="number" id="droitsEnreg" value="5.8" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label>Taxe de publicité foncière</label>
+                    <input type="number" id="taxePublicite" value="125">
+                </div>
+                <div class="input-group">
+                    <label>Contribution sécurité immobilière</label>
+                    <input type="number" id="securiteImmo" value="15">
+                </div>
+                <div class="input-group">
+                    <label>Frais hypothèque</label>
+                    <input type="number" id="hypotheque" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 3: FRAIS BANCAIRES -->
+            <div class="calc-section">
+                <h3>🏦 Frais bancaires</h3>
+                <div class="input-group">
+                    <label>Frais de dossier</label>
+                    <input type="number" id="fraisDossier" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Frais de garantie</label>
+                    <input type="number" id="garantieBancaire" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Assurance emprunteur/an</label>
+                    <input type="number" id="assuranceEmprunt" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Frais courtage</label>
+                    <input type="number" id="courtage" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Frais évaluation</label>
+                    <input type="number" id="evaluation" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 4: FRAIS AGENCE/INTERMÉDIAIRES -->
+            <div class="calc-section">
+                <h3>🏪 Agence/Intermédiaires</h3>
+                <div class="input-group">
+                    <label>Commission agence (%)</label>
+                    <input type="number" id="commissionAgence" value="0" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label>Frais négociateur</label>
+                    <input type="number" id="negociateur" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Commission chasseur</label>
+                    <input type="number" id="chasseur" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Frais mandataire</label>
+                    <input type="number" id="mandataire" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 5: DIAGNOSTICS/EXPERTISES -->
+            <div class="calc-section">
+                <h3>🔍 Diagnostics/Expertises</h3>
+                <div class="input-group">
+                    <label>Diagnostics obligatoires</label>
+                    <input type="number" id="diagnostics" value="1500">
+                </div>
+                <div class="input-group">
+                    <label>Expert technique BTP</label>
+                    <input type="number" id="expertBTP" value="800">
+                </div>
+                <div class="input-group">
+                    <label>Étude géotechnique</label>
+                    <input type="number" id="geotechnique" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Expertise pollution</label>
+                    <input type="number" id="pollution" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Géomètre</label>
+                    <input type="number" id="geometre" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 6: FRAIS JURIDIQUES -->
+            <div class="calc-section">
+                <h3>⚖️ Frais juridiques</h3>
+                <div class="input-group">
+                    <label>Avocat conseil</label>
+                    <input type="number" id="avocat" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Huissier</label>
+                    <input type="number" id="huissier" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Frais contentieux</label>
+                    <input type="number" id="contentieux" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Constitution SCI</label>
+                    <input type="number" id="sci" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 7: TRAVAUX STRUCTURE -->
+            <div class="calc-section">
+                <h3>🏗️ Travaux structure</h3>
+                <div class="input-group">
+                    <label>Toiture</label>
+                    <input type="number" id="toiture" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Charpente</label>
+                    <input type="number" id="charpente" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Maçonnerie</label>
+                    <input type="number" id="maconnerie" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Façade/Ravalement</label>
+                    <input type="number" id="facade" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Étanchéité</label>
+                    <input type="number" id="etancheite" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 8: TRAVAUX TECHNIQUES -->
+            <div class="calc-section">
+                <h3>⚡ Travaux techniques</h3>
+                <div class="input-group">
+                    <label>Électricité</label>
+                    <input type="number" id="electricite" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Plomberie</label>
+                    <input type="number" id="plomberie" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Chauffage</label>
+                    <input type="number" id="chauffage" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Ventilation/Clim</label>
+                    <input type="number" id="ventilation" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Raccordements</label>
+                    <input type="number" id="raccordements" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 9: TRAVAUX FINITIONS -->
+            <div class="calc-section">
+                <h3>🎨 Finitions</h3>
+                <div class="input-group">
+                    <label>Sols/Carrelage</label>
+                    <input type="number" id="sols" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Peinture</label>
+                    <input type="number" id="peinture" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Menuiseries</label>
+                    <input type="number" id="menuiseries" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Cuisine/SDB</label>
+                    <input type="number" id="cuisineSdb" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Éclairage</label>
+                    <input type="number" id="eclairage" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 10: MISE AUX NORMES -->
+            <div class="calc-section">
+                <h3>📋 Mise aux normes</h3>
+                <div class="input-group">
+                    <label>Accessibilité PMR</label>
+                    <input type="number" id="pmr" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Sécurité incendie</label>
+                    <input type="number" id="incendie" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Normes environnementales</label>
+                    <input type="number" id="environnement" value="0">
+                </div>
+                <div class="input-group">
+                    <label>ERP (si applicable)</label>
+                    <input type="number" id="erp" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Contrôles techniques</label>
+                    <input type="number" id="controles" value="0">
+                </div>
+            </div>
+
+            <!-- SECTION 11: FRAIS CHANTIER -->
+            <div class="calc-section">
+                <h3>🚧 Frais de chantier</h3>
+                <div class="input-group">
+                    <label>Sécurisation chantier</label>
+                    <input type="number" id="securisation" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Évacuation gravats</label>
+                    <input type="number" id="gravats" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Location matériel</label>
+                    <input type="number" id="location" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Maîtrise d'œuvre</label>
+                    <input type="number" id="maitriseOeuvre" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Assurance dommage-ouvrage</label>
+                    <input type="number" id="dommageOuvrage" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Imprévus travaux (%)</label>
+                    <input type="number" id="imprevusTravaux" value="15">
+                </div>
+            </div>
+
+            <!-- SECTION 12: FRAIS PENDANT DÉTENTION -->
+            <div class="calc-section">
+                <h3>⏱️ Frais détention</h3>
+                <div class="input-group">
+                    <label>Durée détention (mois)</label>
+                    <input type="number" id="dureeDetention" value="12">
+                </div>
+                <div class="input-group">
+                    <label>Assurance PNO/mois</label>
+                    <input type="number" id="assurancePNO" value="150">
+                </div>
+                <div class="input-group">
+                    <label>Taxes foncières/an</label>
+                    <input type="number" id="taxesFoncieres" value="3000">
+                </div>
+                <div class="input-group">
+                    <label>Syndic/mois</label>
+                    <input type="number" id="syndic" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Gardiennage/mois</label>
+                    <input type="number" id="gardiennage" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Fluides/mois</label>
+                    <input type="number" id="fluides" value="100">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECTION OBJECTIFS -->
+        <div style="margin-top: 25px;">
+            <div class="calc-section">
+                <h3>🎯 Objectifs & Projection</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                    <div class="input-group">
+                        <label>ROI cible (%)</label>
+                        <input type="number" id="roiCible" value="25">
+                    </div>
+                    <div class="input-group">
+                        <label>Prix revente estimé</label>
+                        <input type="number" id="prixRevente" placeholder="400000">
+                    </div>
+                    <div class="input-group">
+                        <label>Frais revente (%)</label>
+                        <input type="number" id="fraisRevente" value="8">
+                    </div>
+                    <div class="input-group">
+                        <label>Plus-value imposable (%)</label>
+                        <input type="number" id="plusValue" value="19">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calculerUltraComplet()" style="margin-top: 25px; font-size: 1.2em;">🎯 ANALYSE COMPLÈTE D'ACQUISITION</button>
+        
+        <div id="resultat"></div>
+    </div>
+</div>
+</div>
+<script>
+let prospects = JSON.parse(localStorage.getItem('prospects') || '[]');
+
+function updateDate() {
+    const today = new Date();
+    const week = Math.ceil((today - new Date(today.getFullYear(), 0, 1)) / 604800000);
+    document.getElementById('semaine').textContent = week;
+    document.getElementById('date').textContent = today.toLocaleDateString('fr-FR');
+}
+
+function openTab(index) {
+    document.querySelectorAll('.tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.tab-content').forEach((content, i) => {
+        content.classList.toggle('active', i === index);
+    });
+}
+
+function updateKPIs() {
+    document.getElementById('nbAnalysees').textContent = prospects.length;
+    document.getElementById('nbContactes').textContent = prospects.filter(p => p.statut !== 'Lead').length;
+    document.getElementById('nbVisites').textContent = prospects.filter(p => p.statut === 'Visité' || p.statut === 'Offre').length;
+    document.getElementById('nbOffres').textContent = prospects.filter(p => p.statut === 'Offre').length;
+}
+
+function toggleForm() {
+    const form = document.getElementById('formProspect');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+function saveProspect() {
+    const prospect = {
+        date: new Date().toLocaleDateString('fr-FR'),
+        adresse: document.getElementById('adresse').value,
+        vendeur: document.getElementById('vendeur').value,
+        surface: document.getElementById('surfacePipeline').value,
+        prix: document.getElementById('prix').value,
+        statut: document.getElementById('statut').value,
+        notes: document.getElementById('notes').value
+    };
+    
+    if (!prospect.adresse || !prospect.prix) {
+        alert('Merci de remplir au minimum l\'adresse et le prix');
+        return;
+    }
+    
+    prospects.push(prospect);
+    localStorage.setItem('prospects', JSON.stringify(prospects));
+    updatePipeline();
+    updateKPIs();
+    toggleForm();
+    
+    // Reset
+    document.getElementById('adresse').value = '';
+    document.getElementById('vendeur').value = '';
+    document.getElementById('surfacePipeline').value = '';
+    document.getElementById('prix').value = '';
+    document.getElementById('notes').value = '';
+}
+
+function updatePipeline() {
+    const tbody = document.getElementById('pipelineBody');
+    
+    if (prospects.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:40px; color:#999;">Aucun prospect</td></tr>';
+        return;
+    }
+    
+    tbody.innerHTML = prospects.map((p, i) => `
+        <tr>
+            <td>${p.date}</td>
+            <td>${p.adresse}</td>
+            <td>${p.vendeur || '-'}</td>
+            <td>${p.surface ? p.surface + ' m²' : '-'}</td>
+            <td>${parseInt(p.prix).toLocaleString('fr-FR')} €</td>
+            <td><span style="background: #667eea; color: white; padding: 5px 10px; border-radius: 5px;">${p.statut}</span></td>
+            <td>${p.notes || '-'}</td>
+            <td><button class="btn btn-secondary" onclick="deleteProspect(${i})" style="padding: 8px 15px; font-size: 0.9em;">🗑️</button></td>
+        </tr>
+    `).join('');
+}
+
+function deleteProspect(index) {
+    if (confirm('Supprimer ce prospect ?')) {
+        prospects.splice(index, 1);
+        localStorage.setItem('prospects', JSON.stringify(prospects));
+        updatePipeline();
+        updateKPIs();
+    }
+}
+
+function calculerUltraComplet() {
+    // Récupération prix et surface
+    const prix = parseFloat(document.getElementById('prixVendeur').value) || 0;
+    const surface = parseFloat(document.getElementById('surface').value) || 0;
+    
+    if (prix === 0) {
+        alert('Entrez le prix du vendeur');
+        return;
+    }
+    
+    // FRAIS NOTARIAUX
+    const emoluments = parseFloat(document.getElementById('emoluments').value) || 0;
+    const droitsEnreg = prix * (parseFloat(document.getElementById('droitsEnreg').value) / 100 || 0);
+    const taxePublicite = parseFloat(document.getElementById('taxePublicite').value) || 0;
+    const securiteImmo = parseFloat(document.getElementById('securiteImmo').value) || 0;
+    const hypotheque = parseFloat(document.getElementById('hypotheque').value) || 0;
+    const totalNotariaux = emoluments + droitsEnreg + taxePublicite + securiteImmo + hypotheque;
+    
+    // FRAIS BANCAIRES
+    const fraisDossier = parseFloat(document.getElementById('fraisDossier').value) || 0;
+    const garantieBancaire = parseFloat(document.getElementById('garantieBancaire').value) || 0;
+    const assuranceEmprunt = parseFloat(document.getElementById('assuranceEmprunt').value) || 0;
+    const courtage = parseFloat(document.getElementById('courtage').value) || 0;
+    const evaluation = parseFloat(document.getElementById('evaluation').value) || 0;
+    const totalBancaires = fraisDossier + garantieBancaire + assuranceEmprunt + courtage + evaluation;
+    
+    // FRAIS AGENCE
+    const commissionAgence = prix * (parseFloat(document.getElementById('commissionAgence').value) / 100 || 0);
+    const negociateur = parseFloat(document.getElementById('negociateur').value) || 0;
+    const chasseur = parseFloat(document.getElementById('chasseur').value) || 0;
+    const mandataire = parseFloat(document.getElementById('mandataire').value) || 0;
+    const totalAgence = commissionAgence + negociateur + chasseur + mandataire;
+    
+    // DIAGNOSTICS/EXPERTISES
+    const diagnostics = parseFloat(document.getElementById('diagnostics').value) || 0;
+    const expertBTP = parseFloat(document.getElementById('expertBTP').value) || 0;
+    const geotechnique = parseFloat(document.getElementById('geotechnique').value) || 0;
+    const pollution = parseFloat(document.getElementById('pollution').value) || 0;
+    const geometre = parseFloat(document.getElementById('geometre').value) || 0;
+    const totalDiagnostics = diagnostics + expertBTP + geotechnique + pollution + geometre;
+    
+    // FRAIS JURIDIQUES
+    const avocat = parseFloat(document.getElementById('avocat').value) || 0;
+    const huissier = parseFloat(document.getElementById('huissier').value) || 0;
+    const contentieux = parseFloat(document.getElementById('contentieux').value) || 0;
+    const sci = parseFloat(document.getElementById('sci').value) || 0;
+    const totalJuridiques = avocat + huissier + contentieux + sci;
+    
+    // TRAVAUX STRUCTURE
+    const toiture = parseFloat(document.getElementById('toiture').value) || 0;
+    const charpente = parseFloat(document.getElementById('charpente').value) || 0;
+    const maconnerie = parseFloat(document.getElementById('maconnerie').value) || 0;
+    const facade = parseFloat(document.getElementById('facade').value) || 0;
+    const etancheite = parseFloat(document.getElementById('etancheite').value) || 0;
+    const totalStructure = toiture + charpente + maconnerie + facade + etancheite;
+    
+    // TRAVAUX TECHNIQUES
+    const electricite = parseFloat(document.getElementById('electricite').value) || 0;
+    const plomberie = parseFloat(document.getElementById('plomberie').value) || 0;
+    const chauffage = parseFloat(document.getElementById('chauffage').value) || 0;
+    const ventilation = parseFloat(document.getElementById('ventilation').value) || 0;
+    const raccordements = parseFloat(document.getElementById('raccordements').value) || 0;
+    const totalTechniques = electricite + plomberie + chauffage + ventilation + raccordements;
+    
+    // TRAVAUX FINITIONS
+    const sols = parseFloat(document.getElementById('sols').value) || 0;
+    const peinture = parseFloat(document.getElementById('peinture').value) || 0;
+    const menuiseries = parseFloat(document.getElementById('menuiseries').value) || 0;
+    const cuisineSdb = parseFloat(document.getElementById('cuisineSdb').value) || 0;
+    const eclairage = parseFloat(document.getElementById('eclairage').value) || 0;
+    const totalFinitions = sols + peinture + menuiseries + cuisineSdb + eclairage;
+    
+    // MISE AUX NORMES
+    const pmr = parseFloat(document.getElementById('pmr').value) || 0;
+    const incendie = parseFloat(document.getElementById('incendie').value) || 0;
+    const environnement = parseFloat(document.getElementById('environnement').value) || 0;
+    const erp = parseFloat(document.getElementById('erp').value) || 0;
+    const controles = parseFloat(document.getElementById('controles').value) || 0;
+    const totalNormes = pmr + incendie + environnement + erp + controles;
+    
+    // FRAIS CHANTIER
+    const securisation = parseFloat(document.getElementById('securisation').value) || 0;
+    const gravats = parseFloat(document.getElementById('gravats').value) || 0;
+    const location = parseFloat(document.getElementById('location').value) || 0;
+    const maitriseOeuvre = parseFloat(document.getElementById('maitriseOeuvre').value) || 0;
+    const dommageOuvrage = parseFloat(document.getElementById('dommageOuvrage').value) || 0;
+    const totalChantier = securisation + gravats + location + maitriseOeuvre + dommageOuvrage;
+    
+    // TOTAL TRAVAUX + IMPRÉVUS
+    const travauxBruts = totalStructure + totalTechniques + totalFinitions + totalNormes + totalChantier;
+    const tauxImprevus = parseFloat(document.getElementById('imprevusTravaux').value) / 100 || 0.15;
+    const imprevusTravaux = travauxBruts * tauxImprevus;
+    const totalTravaux = travauxBruts + imprevusTravaux;
+    
+    // FRAIS PENDANT DÉTENTION
+    const dureeDetention = parseFloat(document.getElementById('dureeDetention').value) || 12;
+    const assurancePNO = parseFloat(document.getElementById('assurancePNO').value) || 0;
+    const taxesFoncieres = parseFloat(document.getElementById('taxesFoncieres').value) || 0;
+    const syndic = parseFloat(document.getElementById('syndic').value) || 0;
+    const gardiennage = parseFloat(document.getElementById('gardiennage').value) || 0;
+    const fluides = parseFloat(document.getElementById('fluides').value) || 0;
+    
+    const fraisDetention = (assurancePNO + syndic + gardiennage + fluides) * dureeDetention + (taxesFoncieres * dureeDetention / 12);
+    
+    // TOTAL FRAIS ACQUISITION
+    const totalFraisAcquisition = totalNotariaux + totalBancaires + totalAgence + totalDiagnostics + totalJuridiques;
+    
+    // COÛT TOTAL
+    const coutTotal = prix + totalFraisAcquisition + totalTravaux + fraisDetention;
+    
+    // CALCUL OFFRE
+    const roiCible = parseFloat(document.getElementById('roiCible').value) / 100 || 0.25;
+    const margeNecessaire = coutTotal * roiCible;
+    const offre = Math.round(prix - margeNecessaire);
+    const prixM2 = surface > 0 ? Math.round(offre / surface) : 0;
+    
+    // PROJECTION REVENTE
+    const prixRevente = parseFloat(document.getElementById('prixRevente').value) || 0;
+    const tauxFraisRevente = parseFloat(document.getElementById('fraisRevente').value) / 100 || 0.08;
+    const tauxPlusValue = parseFloat(document.getElementById('plusValue').value) / 100 || 0.19;
+    
+    let beneficeNet = 0;
+    let roiRevente = 0;
+    let impotPlusValue = 0;
+    
+    if (prixRevente > 0) {
+        const fraisReventeTotal = prixRevente * tauxFraisRevente;
+        const plusValueBrute = prixRevente - fraisReventeTotal - coutTotal;
+        impotPlusValue = Math.max(0, plusValueBrute * tauxPlusValue);
+        beneficeNet = plusValueBrute - impotPlusValue;
+        roiRevente = ((beneficeNet / coutTotal) * 100);
+    }
+    
+    document.getElementById('resultat').innerHTML = `
+        <div class="result">
+            <h2>🎯 ANALYSE ULTRA COMPLÈTE D'ACQUISITION</h2>
+            <div class="result-offre">${offre.toLocaleString('fr-FR')} €</div>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">Prix d'offre optimisé (tous frais inclus)</p>
+            
+            <div class="result-details">
+                <div class="result-detail">
+                    <div class="result-detail-label">Prix/m²</div>
+                    <div class="result-detail-value">${prixM2.toLocaleString('fr-FR')} €</div>
+                </div>
+                <div class="result-detail">
+                    <div class="result-detail-label">Coût total</div>
+                    <div class="result-detail-value">${coutTotal.toLocaleString('fr-FR')} €</div>
+                </div>
+                <div class="result-detail">
+                    <div class="result-detail-label">Travaux</div>
+                    <div class="result-detail-value">${totalTravaux.toLocaleString('fr-FR')} €</div>
+                </div>
+                <div class="result-detail">
+                    <div class="result-detail-label">Frais acquisition</div>
+                    <div class="result-detail-value">${totalFraisAcquisition.toLocaleString('fr-FR')} €</div>
+                </div>
+                <div class="result-detail">
+                    <div class="result-detail-label">ROI cible</div>
+                    <div class="result-detail-value">${(roiCible * 100).toFixed(1)} %</div>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h3 style="margin-bottom: 20px;">📊 Décomposition exhaustive des coûts</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-section">
+                        <h4>⚖️ Frais notariaux</h4>
+                        <div class="breakdown-item">
+                            <span>Émoluments</span>
+                            <span>${emoluments.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Droits d'enregistrement</span>
+                            <span>${droitsEnreg.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Taxes diverses</span>
+                            <span>${(taxePublicite + securiteImmo).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Hypothèque</span>
+                            <span>${hypotheque.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${totalNotariaux.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h4>🏦 Frais bancaires</h4>
+                        <div class="breakdown-item">
+                            <span>Dossier + Garantie</span>
+                            <span>${(fraisDossier + garantieBancaire).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Assurance emprunteur</span>
+                            <span>${assuranceEmprunt.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Courtage</span>
+                            <span>${courtage.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Évaluation</span>
+                            <span>${evaluation.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${totalBancaires.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h4>🏪 Intermédiaires</h4>
+                        <div class="breakdown-item">
+                            <span>Commission agence</span>
+                            <span>${commissionAgence.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Négociateur</span>
+                            <span>${negociateur.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Chasseur/Mandataire</span>
+                            <span>${(chasseur + mandataire).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${totalAgence.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="breakdown-grid" style="margin-top: 20px;">
+                    <div class="breakdown-section">
+                        <h4>🔍 Diagnostics/Expertises</h4>
+                        <div class="breakdown-item">
+                            <span>Diagnostics obligatoires</span>
+                            <span>${diagnostics.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Expert BTP</span>
+                            <span>${expertBTP.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Études spécialisées</span>
+                            <span>${(geotechnique + pollution + geometre).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${totalDiagnostics.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h4>🔨 Travaux (total)</h4>
+                        <div class="breakdown-item">
+                            <span>Structure</span>
+                            <span>${totalStructure.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Techniques</span>
+                            <span>${totalTechniques.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Finitions</span>
+                            <span>${totalFinitions.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Normes + Chantier</span>
+                            <span>${(totalNormes + totalChantier).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Imprévus (${(tauxImprevus * 100)}%)</span>
+                            <span>${imprevusTravaux.toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${totalTravaux.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h4>⏱️ Détention (${dureeDetention} mois)</h4>
+                        <div class="breakdown-item">
+                            <span>Assurance PNO</span>
+                            <span>${(assurancePNO * dureeDetention).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Taxes foncières</span>
+                            <span>${(taxesFoncieres * dureeDetention / 12).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Syndic + Gardiennage</span>
+                            <span>${((syndic + gardiennage) * dureeDetention).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Fluides</span>
+                            <span>${(fluides * dureeDetention).toLocaleString('fr-FR')} €</span>
+                        </div>
+                        <div class="breakdown-item total-line">
+                            <span><strong>Sous-total</strong></span>
+                            <span><strong>${fraisDetention.toLocaleString('fr-FR')} €</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                ${prixRevente > 0 ? `
+                <div style="margin-top: 25px; border-top: 2px solid rgba(255,255,255,0.3); padding-top: 20px;">
+                    <h4>🎯 Projection revente</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div>
+                            <div class="breakdown-item">
+                                <span>Prix revente</span>
+                                <span>${prixRevente.toLocaleString('fr-FR')} €</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Frais revente</span>
+                                <span>-${(prixRevente * tauxFraisRevente).toLocaleString('fr-FR')} €</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Impôt plus-value</span>
+                                <span>-${impotPlusValue.toLocaleString('fr-FR')} €</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="breakdown-item total-line">
+                                <span><strong>Bénéfice net</strong></span>
+                                <span><strong>${beneficeNet.toLocaleString('fr-FR')} €</strong></span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span><strong>ROI réel</strong></span>
+                                <span><strong>${roiRevente.toFixed(1)} %</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="total-line" style="font-size: 1.4em; text-align: center; margin-top: 30px; border-top: 3px solid rgba(255,255,255,0.5); padding-top: 20px;">
+                    💰 INVESTISSEMENT TOTAL: ${coutTotal.toLocaleString('fr-FR')} €
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px; font-size: 1.1em; opacity: 0.9;">
+                    🎯 Offre recommandée: <strong>${offre.toLocaleString('fr-FR')} €</strong> 
+                    (${prixM2} €/m² • ROI ${(roiCible * 100)}%)
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+updateDate();
+updateKPIs();
+updatePipeline();
+</script>
+</body>
+</html>
+</artifact>
