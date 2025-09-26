@@ -252,12 +252,12 @@ grid-template-columns: 1fr;
 
 // Configuration (vous pouvez modifier ces valeurs)
 let masterPassword = "ADMIN2025";  // Votre mot de passe maître
-let currentAccessCode = "NORIA001"; // Code d'accès par défaut
+let currentAccessCode = "UMDB001"; // Code d'accès par défaut
 
 // Génère un nouveau code aléatoire
 function generateNewCode() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = "NORIA";
+    let result = "UMDB";
     for (let i = 0; i < 3; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -1208,4 +1208,5 @@ updatePipeline();
 </script>
 </body>
 </html>
+
 </artifact>
